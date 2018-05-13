@@ -23,6 +23,7 @@ export default class Test extends Component {
       searchtext: '',
       username: '',
       password: '',
+      selectedTab: 'app',
     };
   }
 
@@ -40,53 +41,92 @@ export default class Test extends Component {
   }
 
   render() {
-    return (
-      <Container>
 
-
-        <Header searchBar rounded>
-          <Item>
-            <Icon name="ios-search" />
-            <Input placeholder="Search" onChangeText={(searchtext)=>{this.setState({searchtext})}} />
-            <Icon name="ios-people" />
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
-
-        <Content styles={{justifyContent: 'center', alignItems: 'center'}}>
-          <Form>
-            <Item floatingLabel>
-              <Label>Username</Label>
-              <Input onChangeText={(username)=>{this.setState({username})}}/>
+    if(this.state.selectedTab==='app'){
+      return (
+        <Container>
+  
+  
+          <Header searchBar rounded>
+            <Item>
+              <Icon name="ios-search" />
+              <Input placeholder="Search" onChangeText={(searchtext)=>{this.setState({searchtext})}} />
+              <Icon name="ios-people" />
             </Item>
-            <Item floatingLabel last>
-              <Label>Password</Label>
-              <Input  onChangeText={(password)=>{this.setState({password})}}/>
+            <Button transparent>
+              <Text>Search</Text>
+            </Button>
+          </Header>
+  
+          <Content styles={{justifyContent: 'center', alignItems: 'center'}}>
+            <Form>
+              <Item floatingLabel>
+                <Label>Username</Label>
+                <Input onChangeText={(username)=>{this.setState({username})}}/>
+              </Item>
+              <Item floatingLabel last>
+                <Label>Password</Label>
+                <Input  onChangeText={(password)=>{this.setState({password})}}/>
+              </Item>
+            </Form>
+            <Button block onPress={()=>{alert("username: " + this.state.username + '\npassword: ' + this.state.password + '\nsearchtext: ' + this.state.searchtext)}}><Text>Button</Text></Button>
+            <Button block info onPress={Actions.Page}><Text>Next Page</Text></Button>
+            
+  
+          </Content>
+  
+          <Footer>
+            <FooterTab>
+              <Button active={this.state.selectedTab==='app'} badge vertical onPress={()=>{this.setState({selectedTab: 'app'})}}>
+                <Badge><Text>6</Text></Badge>
+                <Icon name="apps"/>
+                <Text>Apps</Text>
+              </Button>
+              <Button active={this.state.selectedTab==='camera'} vertical onPress={()=>{this.setState({selectedTab: 'camera'})}}>
+                <Icon name="camera"/>
+                <Text>Camera</Text>
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      );
+    }else{
+      return (
+        <Container>
+  
+  
+          <Header searchBar rounded>
+            <Item>
+              <Icon name="ios-search" />
+              <Input placeholder="Search" onChangeText={(searchtext)=>{this.setState({searchtext})}} />
+              <Icon name="ios-people" />
             </Item>
-          </Form>
-          <Button block onPress={()=>{alert("username: " + this.state.username + '\npassword: ' + this.state.password + '\nsearchtext: ' + this.state.searchtext)}}><Text>Button</Text></Button>
-          <Button block info onPress={Actions.Page}><Text>Next Page</Text></Button>
-          
-
-        </Content>
-
-        <Footer>
-          <FooterTab>
-            <Button active badge vertical>
-              <Badge><Text>6</Text></Badge>
-              <Icon name="apps"/>
-              <Text>Apps</Text>
+            <Button transparent>
+              <Text>Search</Text>
             </Button>
-            <Button vertical>
-              <Icon name="camera"/>
-              <Text>Camera</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
-    );
+          </Header>
+  
+          <Content styles={{justifyContent: 'center', alignItems: 'center'}}>
+            <Text>Camera Fragment</Text>
+          </Content>
+  
+          <Footer>
+            <FooterTab>
+              <Button active={this.state.selectedTab==='app'} badge vertical onPress={()=>{this.setState({selectedTab: 'app'})}}>
+                <Badge><Text>6</Text></Badge>
+                <Icon name="apps"/>
+                <Text>Apps</Text>
+              </Button>
+              <Button active={this.state.selectedTab==='camera'} vertical onPress={()=>{this.setState({selectedTab: 'camera'})}}>
+                <Icon name="camera"/>
+                <Text>Camera</Text>
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      );
+    }
+    
 
   }
 }
