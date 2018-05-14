@@ -13,8 +13,9 @@ import { /*Container,*/ Content, Form, Input, Item, Button, Icon, Badge,
   Footer, FooterTab
 } from 'native-base';
 
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { changePassword, changeSearchText, changeSelectedTab, changeUsername } from './redux';
+import { store } from './redux';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -45,9 +46,9 @@ export class Test extends Component {
 
   render() {
 
-    if(this.state.selectedTab==='app'){
+    if(this.state.selectedTab!==null && this.state.selectedTab==='app'){
       return (
-  
+
         <View>
           <Header searchBar rounded>
             <Item>
@@ -94,7 +95,6 @@ export class Test extends Component {
       );
     }else{
       return (
-  
         <View>
           <Header searchBar rounded>
             <Item>
