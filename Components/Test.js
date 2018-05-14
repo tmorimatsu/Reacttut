@@ -8,23 +8,26 @@ import { StyleSheet,
   TouchableOpacity,
   ActiveIndicator, 
   FlatList } from 'react-native';
-import { Container, Content, Form, Input, Item, Button, Icon, Badge,
+import { /*Container,*/ Content, Form, Input, Item, Button, Icon, Badge,
   Header, Left, Body, Right, Title, FloatingLabel, Label,
   Footer, FooterTab
 } from 'native-base';
 
+import { connect } from 'react-redux';
+import { changePassword, changeSearchText, changeSelectedTab, changeUsername } from './redux';
+
 import { Actions } from 'react-native-router-flux';
 
-export default class Test extends Component {
+export class Test extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    /*this.state = { 
       searchtext: '',
       username: '',
       password: '',
       selectedTab: 'app',
-    };
+    };*/
   }
 
   url = '';
@@ -44,13 +47,12 @@ export default class Test extends Component {
 
     if(this.state.selectedTab==='app'){
       return (
-        <Container>
   
-  
+        <View>
           <Header searchBar rounded>
             <Item>
               <Icon name="ios-search" />
-              <Input placeholder="Search" onChangeText={(searchtext)=>{this.setState({searchtext})}} />
+              <Input placeholder="Search" onChangeText={this.props.text/*(searchtext)=>{this.setState({searchtext})}*/} />
               <Icon name="ios-people" />
             </Item>
             <Button transparent>
@@ -88,13 +90,12 @@ export default class Test extends Component {
               </Button>
             </FooterTab>
           </Footer>
-        </Container>
+          </View>
       );
     }else{
       return (
-        <Container>
   
-  
+        <View>
           <Header searchBar rounded>
             <Item>
               <Icon name="ios-search" />
@@ -123,19 +124,26 @@ export default class Test extends Component {
               </Button>
             </FooterTab>
           </Footer>
-        </Container>
+          </View>
       );
     }
-    
-
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const mapStateToProps = state => ({
+  stateholder: state.changeState,
 });
+
+const mapDispatchToProps = {
+  changePassword, 
+  changeSearchText, 
+  changeSelectedTab, 
+  changeUsername,
+};
+
+const Container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Test);
+
+export default Container;
